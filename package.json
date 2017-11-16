@@ -1,0 +1,28 @@
+{
+  "name": "nes-file",
+  "version": "0.0.1",
+  "description": "Nintendo Entertainment System NES 2.0 (.nes) file reader",
+  "main": "nes-file.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satoshinm/nes-file.git"
+  },
+  "keywords": [
+    "nes",
+    "ines",
+    "file",
+    "parser"
+  ],
+  "author": "Satoshi N. M.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/satoshinm/nes-file/issues"
+  },
+  "homepage": "https://github.com/satoshinm/nes-file#readme",
+  "devDependencies": {
+    "tape": "^4.8.0"
+  }
+}
