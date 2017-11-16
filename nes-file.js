@@ -124,6 +124,8 @@ function parse(buf) {
     info.reserved15 = byte15;
   }
 
+  info.header = buf.slice(0, 16);
+
   if (info.has_trainer) {
     info.trainer = buf.slice(16, 16 + 512);
   }
