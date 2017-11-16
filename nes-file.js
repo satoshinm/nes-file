@@ -5,8 +5,15 @@
 
 function parse(buf) {
   const magic = buf.readUInt32BE(0);
-  if (magic != 0x4e45531a) { // NES^Z
-    throw new Error('Not a .nes file (bad magic');
+  switch (magic) {
+    case 0x554e4946: // UNIF
+      return {is_unif: true};
+      // TODO: could parse this, but format is deprecated:
+      // https://wiki.nesdev.com/w/index.php/UNIF
+    case 0x4e45531a: // NES^Z
+      break;
+    default:
+      throw new Error('Not a .nes file (bad magic)');
   }
 
   const info = {};
@@ -110,7 +117,7 @@ function parse(buf) {
     ][byte13 & 0x0f];
     info.vs_mode = (byte13 & 0xf0) >> 4;
 
-    const byte14 = buf.readUint8(14);
+    const byte14 = buf.readUInt8(14);
     info.extra_roms = byte14 & 3;
 
     const byte15 = buf.readUInt8(15);
