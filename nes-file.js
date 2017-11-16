@@ -28,7 +28,7 @@ function parse(buf) {
   const flags6 = buf.readUInt8(6);
   info.mirroring = !!(flags6 & 1) ? 'vertical' : 'horizontal';
   info.has_battery_backed_sram = !!(flags6 & 2);
-  info.has_trainer = !!(flags6 && 4);
+  info.has_trainer = !!(flags6 & 4);
   info.four_screen_mode = !!(flags6 && 8);
   info.mapper = flags6 >> 4;
 
@@ -123,6 +123,25 @@ function parse(buf) {
     const byte15 = buf.readUInt8(15);
     info.reserved15 = byte15;
   }
+
+  if (info.has_trainer) {
+    info.trainer = buf.slice(16, 16 + 512);
+  }
+  const prg_start = 16 + (info.has_trainer ? 512 : 0);
+  info.prg_rom = buf.slice(prg_start, prg_start + info.prg_rom_size);
+  if (info.prg_rom.length !== info.prg_rom_size) {
+    throw new Error(`PRG ROM bad read: ${info.prg_rom.length} != ${info.prg_rom_size}`);
+  }
+
+
+  const chr_start = prg_start + info.prg_rom_size;
+  info.chr_rom = buf.slice(chr_start, chr_start + info.chr_rom_size);
+  if (info.chr_rom.length !== info.chr_rom_size) {
+    throw new Error(`CHR ROM bad read: ${info.chr_rom.length} != ${info.chr_rom_size}`);
+  }
+
+  // PlayChoice INST-ROM and/or PROM and/or 128-byte or 127-byte title
+  info.trailer = buf.slice(chr_start + info.chr_rom_size);
 
   return info;
 }

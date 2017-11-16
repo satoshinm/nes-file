@@ -50,21 +50,32 @@ test('all roms', (t) => {
   const dir = '../roms';
   const paths = walk(dir);
 
-  const mapper_stats = {};
   let count = 0;
+  let fail = 0;
   paths.forEach((path) => {
     console.log(`Parsing ${path}`);
+    // Allow parse errors with bad dumps, or with these two dumps which have shorter CHRs than expected
+    const allow_bad = !path.includes('[!]') || path.includes('Famicom Wars (J) [!].nes') || path.includes('Yoshi (U) [!].nes');
     const data = fs.readFileSync(path);
-    const info = parse(data);
 
-    if (info.mapper !== undefined) {
-      const mapper = info.mapper + ':' + (info.submapper || 0);
-      if (mapper_stats[mapper] == undefined) mapper_stats[mapper] = 0;
-      mapper_stats[mapper] += 1;
+    try {
+      const info = parse(data);
+      if (info.is_unif) return; // not supported yet
+
+      console.log(`Mapper: ${info.mapper}, PRG ROM: ${info.prg_rom_size}, CHR ROM: ${info.chr_rom_size}, trailer ${info.trailer.length}`);
+
+      count += 1;
+    } catch (e) {
+      fail += 1;
+
+      console.log(e);
+      if (allow_bad) {
+        console.log(e);
+      } else {
+        throw e;
+      }
     }
-    count += 1;
   });
-  console.log(mapper_stats);
-  console.log(`Parsed ${count} files`);
+  console.log(`Parsed ${count} files, failed ${fail}`);
   t.end();
 });
