@@ -3,7 +3,7 @@
 // https://wiki.nesdev.com/w/index.php/INES
 // https://wiki.nesdev.com/w/index.php/NES_2.0
 
-function parse(buf) {
+function parseNES(buf) {
   const magic = buf.readUInt32BE(0);
   switch (magic) {
     case 0x554e4946: // UNIF
@@ -148,4 +148,4 @@ function parse(buf) {
   return info;
 }
 
-module.exports = { parse };
+module.exports = { parseNES };

@@ -1,13 +1,13 @@
 'use strict';
 
 const fs = require('fs');
-const {parse} = require('./');
+const {parseNES} = require('./');
 
 const test = require('tape');
 
 // a simple freely redistributable game
 test('lj65', (t) => {
-  const info = parse(fs.readFileSync('roms/lj65.nes'));
+  const info = parseNES(fs.readFileSync('roms/lj65.nes'));
   t.equal(info.prg_rom_size, 16384);
   t.equal(info.chr_rom_size, 8192);
   t.equal(info.has_chr_ram, false);
@@ -59,7 +59,7 @@ test('all roms', (t) => {
     const data = fs.readFileSync(path);
 
     try {
-      const info = parse(data);
+      const info = parseNES(data);
       if (info.is_unif) return; // not supported yet
 
       console.log(`Mapper: ${info.mapper}, PRG ROM: ${info.prg_rom_size}, CHR ROM: ${info.chr_rom_size}, trailer ${info.trailer.length}`);
