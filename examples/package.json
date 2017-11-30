@@ -1,0 +1,28 @@
+{
+  "name": "nes-file-example",
+  "version": "0.0.1",
+  "description": "Web-based nes-file parser example",
+  "main": "web.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satoshinm/nes-file.git"
+  },
+  "scripts": {
+    "webpack": "webpack web.js bundle.js"
+  },
+  "keywords": [
+    "nes"
+  ],
+  "author": "Satoshi N. M.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/satoshinm/nes-file/issues"
+  },
+  "homepage": "https://github.com/satoshinm/nes-file#readme",
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "nes-file": "*"
+  }
+}
