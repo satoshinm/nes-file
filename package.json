@@ -8,7 +8,7 @@
     "test": "node test.js"
   },
   "bin": {
-      "./bin/nesfile"
+    "nesfile": "./bin/nesfile"
   },
   "repository": {
     "type": "git",
