@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Nintendo Entertainment System NES 2.0 (.nes) file reader",
   "main": "nes-file.js",
+  "files": ["nes-file.js"],
   "scripts": {
     "test": "node test.js"
   },
