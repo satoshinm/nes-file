@@ -7,6 +7,9 @@
   "scripts": {
     "test": "node test.js"
   },
+  "bin": {
+      "./bin/nesfile"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/satoshinm/nes-file.git"
