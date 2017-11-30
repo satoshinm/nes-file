@@ -2,7 +2,7 @@
 'use strict';
 
 const fs = require('fs');
-const { parse } = require('./');
+const { parse } = require('../');
 
 if (process.argv.length < 3) {
   process.stderr.write(`NES .nes file parser
