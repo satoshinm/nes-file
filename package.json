@@ -4,7 +4,9 @@
   "description": "Nintendo Entertainment System NES 2.0 (.nes) file reader",
   "main": "nes-file.js",
   "files": [
-    "nes-file.js"
+    "nes-file.js",
+    "examples/cli.js",
+    "bin/*"
   ],
   "scripts": {
     "test": "node test.js"
