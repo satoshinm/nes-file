@@ -29,13 +29,13 @@ function parseNES(buf) {
   info.mirroring = !!(flags6 & 1) ? 'vertical' : 'horizontal';
   info.has_battery_backed_sram = !!(flags6 & 2);
   info.has_trainer = !!(flags6 & 4);
-  info.four_screen_mode = !!(flags6 && 8);
+  info.four_screen_mode = !!(flags6 & 8);
   info.mapper = flags6 >> 4;
 
   const flags7 = buf.readUInt8(7);
   info.is_vs_unisystem = !!(flags7 & 1);
   info.is_playchoice10 = !!(flags7 & 2);
-  //info.is_nes2_0 = ((flags7 && 4) >> 2) === 2;
+  //info.is_nes2_0 = ((flags7 & 4) >> 2) === 2;
   info.mapper |= flags7 & 0xf0;
 
   // https://wiki.nesdev.com/w/index.php/INES#Variant_comparison
